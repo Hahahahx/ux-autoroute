@@ -21,7 +21,6 @@ export const routeConfig = [
                 },
                 child: [
                     {
-                        default: true,
                         meta: {
                             name: '土豆'
                         },
