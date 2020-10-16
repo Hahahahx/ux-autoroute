@@ -28,7 +28,7 @@ export interface RouterParams {
 
 declare var Routers:FC<RouterParams>
 declare var LazyComponent:FC<{ componentPath: string }>
-declare var RouterView:ReactElement
+declare var RouterView:Function
 declare var useRoute:Function
 
 declare module "ux-autoroute"{
