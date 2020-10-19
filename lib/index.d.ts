@@ -1,7 +1,5 @@
 /// <reference types="react" />
 
-import { JsxEmit } from "typescript";
-
 export interface RouteParams {
     meta?: { [k: string]: any };
     path: string;
@@ -30,7 +28,7 @@ export interface RouterParams {
 
 
 declare module "ux-autoroute" {
-    function Routers({}: RouterParams & { children: any }): JSX.Element;
+    function Routers({}: RouterParams): JSX.Element;
     function LazyComponent({}: {
         componentPath: string;
         children: any;
