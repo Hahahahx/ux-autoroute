@@ -1,4 +1,6 @@
-import { ReactElement, CSSProperties, FC } from "react";
+/// <reference types="react" />
+
+import { JsxEmit } from "typescript";
 
 export interface RouteParams {
     meta?: { [k: string]: any };
@@ -12,7 +14,6 @@ export interface RouteParams {
     component?: any;
 }
 
-
 /**
  * routers 路由映射表对象
  * noMatch 404
@@ -21,16 +22,25 @@ export interface RouteParams {
  */
 export interface RouterParams {
     routers: Array<RouteParams>;
-    noMatch?: () => ReactElement | JSX.Element;
-    before?: (location: Location) => void | JSX.Element | ReactElement;
+    noMatch?: () => React.ReactElement | JSX.Element;
+    before?: (location: Location) => void | JSX.Element | React.ReactElement;
     after?: (location: Location) => void;
 }
 
-declare var Routers:FC<RouterParams>
-declare var LazyComponent:FC<{ componentPath: string }>
-declare var RouterView:Function
-declare var useRoute:Function
 
-declare module "ux-autoroute"{
-    export {Routers, LazyComponent,RouterView,useRoute}
+
+declare module "ux-autoroute" {
+    function Routers({}: RouterParams & { children: any }): JSX.Element;
+    function LazyComponent({}: {
+        componentPath: string;
+        children: any;
+    }): JSX.Element;
+    function RouterView(): JSX.Element;
+    function useRoute(): {
+        routes: Array<RouteParams>;
+        meta?: any;
+        router?: React.ReactElement;
+    };
+
+    export { Routers, LazyComponent, RouterView, useRoute };
 }
