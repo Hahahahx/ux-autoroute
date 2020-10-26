@@ -8,7 +8,6 @@ export interface RouteParams {
     default?: boolean;
     noLazy?: boolean;
     child: Array<RouteParams>;
-    componentPath: string;
     component?: any;
 }
 

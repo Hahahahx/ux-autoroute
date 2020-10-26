@@ -1,3 +1,5 @@
+//弃用
+
 import React, { FC } from "react";
 import loadable from "@loadable/component";
 

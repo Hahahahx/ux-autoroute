@@ -1,14 +1,13 @@
 import React, { createContext, ReactElement, FC, useContext } from "react";
 import { RouterParams, RouteParams } from "./interface";
-import { Switch, Route, Redirect, useHistory } from "react-router-dom";
-import { LazyComponent } from "./LazyComponent";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 export const RouterContext = createContext<{
     routes: Array<RouteParams>;
     meta?: any;
     router?: ReactElement;
 }>({
-    routes:[]
+    routes: [],
 });
 
 /**
@@ -37,46 +36,38 @@ export const Routers: FC<RouterParams> = ({
 
     return (
         <Switch>
-            {routers.map(
-                (route: RouteParams, index: number) =>
-                    (
-                        <Route
-                            exact={!!route.exact}
-                            path={route.path}
-                            key={index}
-                            render={() => {
-                                if(before){
-                                    const result =  before(location);
-                                    if(result){
-                                        return result
-                                    }
-                                }
-                                return (
-                                    <RouterContext.Provider
-                                        value={{
-                                            routes: route.child,
-                                            meta: route.meta
-                                                ? route.meta
-                                                : null,
-                                            router: route.child.length ? (
-                                                <Routers
-                                                    routers={route.child}
-                                                    noMatch={noMatch}
-                                                />
-                                            ) : undefined,
-                                        }}
-                                    >
-                                        <Component
-                                            Component={route.component}
-                                            componentPath={route.componentPath}
+            {routers.map((route: RouteParams, index: number) => (
+                <Route
+                    exact={!!route.exact}
+                    path={route.path}
+                    key={index}
+                    render={() => {
+                        if (before) {
+                            const result = before(location);
+                            if (result) {
+                                return result;
+                            }
+                        }
+                        return (
+                            <RouterContext.Provider
+                                value={{
+                                    routes: route.child,
+                                    meta: route.meta ? route.meta : null,
+                                    router: route.child.length ? (
+                                        <Routers
+                                            routers={route.child}
+                                            noMatch={noMatch}
                                         />
-                                        {after && after(location)}
-                                    </RouterContext.Provider>
-                                );
-                            }}
-                        />
-                    )
-            )}
+                                    ) : undefined,
+                                }}
+                            >
+                                <route.component />
+                                {after && after(location)}
+                            </RouterContext.Provider>
+                        );
+                    }}
+                />
+            ))}
             {defaultRouter && (
                 <Redirect
                     exact
@@ -89,19 +80,6 @@ export const Routers: FC<RouterParams> = ({
     );
 };
 
-const Component = ({
-    componentPath,
-    Component,
-}: {
-    componentPath: string;
-    Component?: any;
-}) => {
-    return Component ? (
-        <Component />
-    ) : (
-        <LazyComponent componentPath={componentPath} />
-    );
-};
 
 /**
  * 对外暴露的子集路由
@@ -113,5 +91,5 @@ export const RouterView = () => {
 
 export const useRoute = () => {
     const Router = useContext(RouterContext);
-    return Router
+    return Router;
 };
