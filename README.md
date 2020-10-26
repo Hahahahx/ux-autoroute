@@ -91,7 +91,8 @@ interface RouterParams {
 
 所生成的路由映射表`router.ts`:
 ```typescript
-import Page from '@/pages/index';
+import loadable from '@loadable/component';
+import Page from './pages/index';
 export const routeConfig = [
     {
         noLazy: true,
@@ -105,7 +106,7 @@ export const routeConfig = [
                     name: '登录'
                 },
                 child: [],
-                componentPath: 'pages/login/index.tsx',
+                component: loadable(function (){return import('./pages/login/index.tsx')}),
                 path: '/login'
             },
             {
@@ -118,7 +119,7 @@ export const routeConfig = [
                             name: '土豆'
                         },
                         child: [],
-                        componentPath: 'pages/main/potato/index.tsx',
+                        component: loadable(function (){return import('./pages/main/potato/index.tsx')}),
                         path: '/main/potato'
                     },
                     {
@@ -126,17 +127,16 @@ export const routeConfig = [
                             name: '西红柿'
                         },
                         child: [],
-                        componentPath: 'pages/main/tomato/index.tsx',
+                        component: loadable(function (){return import('./pages/main/tomato/index.tsx')}),
                         path: '/main/tomato'
                     }
                 ],
-                componentPath: 'pages/main/index.tsx',
+                component: loadable(function (){return import('./pages/main/index.tsx')}),
                 path: '/main'
             }
         ],
-        componentPath: 'pages/index.tsx',
-        path: '',
-        component: Page
+        component: Page,
+        path: ''
     }
 ]
 ```
