@@ -3,7 +3,7 @@ import Page from './pages/index';
 
 
 
-          export const routeConfig = [
+export const routeConfig = [
     {
         noLazy: true,
         meta: {
