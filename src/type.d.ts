@@ -8,7 +8,7 @@
  */
 declare interface RouterParams {
     routers: Array<RouteParams>;
-    noMatch?: () => React.ReactElement | JSX.Element;
+    noMatch?: React.ReactElement | JSX.Element;
     before?: (
         location: any & Location
     ) => void | JSX.Element | React.ReactElement;
