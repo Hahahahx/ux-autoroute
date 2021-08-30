@@ -103,6 +103,6 @@ export const RouterView = () => {
 
 export const useRouter = () => {
     const history = useHistory();
-    const Router = useContext(RouterContext);
-    return { routers: Router.routers, config: Router.config, history };
+    const router = useContext(RouterContext);
+    return { ...router, history };
 };

@@ -30,11 +30,7 @@ declare module "ux-autoroute" {
      * useRoute
      * 获取路由信息
      */
-    export function useRouter(): {
-        routes: Array<RouteParams>;
-        meta?: any;
-        router?: React.ReactElement;
-    };
+    export function useRouter(): RouterContext & { history: any };
 
     export interface RouteParams {
         path: string;
@@ -53,7 +49,7 @@ declare module "ux-autoroute" {
 
     export interface RouterContext {
         routers: Array<RouteParams>;
-        config?: any;
+        config?: RouteConfig;
         history?: History;
         router?: JSX.Element | React.ReactElement;
     }

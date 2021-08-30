@@ -29,11 +29,7 @@ declare function RouterView(): JSX.Element;
  * useRoute
  * 获取路由信息
  */
-declare function useRouter(): {
-    routes: Array<RouteParams>;
-    meta?: any;
-    router?: React.ReactElement;
-};
+declare function useRouter(): RouterContext & { history: any };
 
 declare interface RouteParams {
     path: string;
@@ -52,7 +48,7 @@ declare interface RouteConfig {
 
 declare interface RouterContext {
     routers: Array<RouteParams>;
-    config?: any;
+    config?: RouteConfig;
     history?: History;
     router?: JSX.Element | React.ReactElement;
 }
