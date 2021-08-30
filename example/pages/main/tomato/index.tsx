@@ -1,13 +1,9 @@
 import React from "react";
-import { useRoute } from "../../../../src/Routers";
+import { useRouter } from "../../../../lib/Routers";
 
 const Tomato = () => {
-    const { meta } = useRoute();
-    return (
-        <>
-            {meta?.name}
-        </>
-    )
+    const { config } = useRouter();
+    return <>{config?.meta?.name}</>;
 };
 
 export default Tomato;

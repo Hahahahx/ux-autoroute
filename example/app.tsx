@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { HashRouter } from "react-router-dom";
-import { Routers } from "../src/index";
-import { routeConfig } from "./routeConfig";
+import { Routers } from "../lib";
+import routeConfig from "./routeConfig";
 
 const App = () => {
     const [userAuth, setAuth] = useState(2);
@@ -25,6 +25,7 @@ const App = () => {
         }
     };
 
+
     return (
         <>
             <div>您的角色权限：{getAuthName()}</div>
@@ -37,7 +38,8 @@ const App = () => {
                 <Routers
                     routers={routeConfig}
                     before={(location) => {
-                        const { hash } = location;
+                        // console.log(location);
+                        const { hash } = window.location;
                         const result = routeAuth.some((item, index) => {
                             return item.some((route) => {
                                 if (hash.includes(route)) {
@@ -52,7 +54,7 @@ const App = () => {
                             return <>您无权访问</>;
                         }
                     }}
-                    noMatch={() => <>404</>}
+                    noMatch={<>404</>}
                 />
             </HashRouter>
         </>

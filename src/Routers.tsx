@@ -1,13 +1,8 @@
-import React, { createContext, ReactElement, FC, useContext } from "react";
-import { RouterParams, RouteParams } from "./interface";
-import { Switch, Route, Redirect } from "react-router-dom";
+import React, { createContext, FC, useContext } from "react";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 
-export const RouterContext = createContext<{
-    routes: Array<RouteParams>;
-    meta?: any;
-    router?: ReactElement;
-}>({
-    routes: [],
+export const RouterContext = createContext<RouterContext>({
+    routers: [],
 });
 
 /**
@@ -21,7 +16,9 @@ export const Routers: FC<RouterParams> = ({
     noMatch,
 }) => {
     // 寻找默认路由
-    const defaultRouter = routers.find((item) => item.default && item.path);
+    const defaultRouter = routers.find(
+        (item: RouteParams) => item.config?.default && item.path
+    );
 
     // 查找父级路由，重定位默认路由
     let fromPath: RegExpMatchArray | null | undefined | string =
@@ -32,13 +29,16 @@ export const Routers: FC<RouterParams> = ({
         fromPath = fromPath.length ? fromPath.join("") : "/";
     }
 
-    const { location } = window;
+    const history = useHistory();
+
+    const { location } = history;
+    // console.log(noMatchRouter);
 
     return (
         <Switch>
             {routers.map((route: RouteParams, index: number) => (
                 <Route
-                    exact={!!route.exact}
+                    exact={!!route?.config?.exact}
                     path={route.path}
                     key={index}
                     render={() => {
@@ -48,17 +48,19 @@ export const Routers: FC<RouterParams> = ({
                                 return result;
                             }
                         }
+
                         return (
                             <RouterContext.Provider
                                 value={{
-                                    routes: route.child,
-                                    meta: route.meta ? route.meta : null,
-                                    router: route.child.length ? (
-                                        <Routers
-                                            routers={route.child}
-                                            noMatch={noMatch}
-                                        />
-                                    ) : undefined,
+                                    routers: route.child || [],
+                                    config: route.config,
+                                    router:
+                                        route.child && route.child.length ? (
+                                            <Routers
+                                                routers={route.child}
+                                                noMatch={noMatch}
+                                            />
+                                        ) : undefined,
                                 }}
                             >
                                 <route.component />
@@ -75,11 +77,21 @@ export const Routers: FC<RouterParams> = ({
                     to={defaultRouter.path}
                 />
             )}
-            <Route path="/*" render={noMatch} />
+            <Route
+                path="/*"
+                render={() => {
+                    // console.log(routers);
+                    const noMatchRouter = routers.find((item: RouteParams) =>
+                        item.path.includes(location.pathname)
+                    );
+
+                    // console.log(noMatchRouter);
+                    return noMatchRouter ? null : noMatch;
+                }}
+            />
         </Switch>
     );
 };
-
 
 /**
  * 对外暴露的子集路由
@@ -89,7 +101,8 @@ export const RouterView = () => {
     return Router.router ? Router.router : <></>;
 };
 
-export const useRoute = () => {
+export const useRouter = () => {
+    const history = useHistory();
     const Router = useContext(RouterContext);
-    return Router;
+    return { routers: Router.routers, config: Router.config, history };
 };

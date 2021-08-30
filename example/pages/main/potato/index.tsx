@@ -1,13 +1,9 @@
-import React from 'react'
-import { useRoute } from '../../../../src/Routers';
+import React from "react";
+import { useRouter } from "../../../../lib/Routers";
 
-const Potato =()=>{
-    const { meta } = useRoute();
-    return (
-        <>
-            {meta?.name}
-        </>
-    )
-}
+const Potato = () => {
+    const { config } = useRouter();
+    return <>{config?.meta?.name}</>;
+};
 
-export default Potato
+export default Potato;

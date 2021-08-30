@@ -1,16 +1,18 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { RouterView, useRoute } from "../../../src/Routers";
+import { RouterView, useRouter } from "../../../lib/Routers";
 
 const Main = () => {
-    const { meta, routes } = useRoute();
+    const { config, routers } = useRouter();
     return (
         <>
-            {meta?.name}
+            {config?.mate?.name}
             <ul>
-                {routes.map((item, index) => (
+                {routers.map((item, index) => (
                     <li key={index}>
-                        <NavLink to={item.path}>{item.meta?.name}</NavLink>
+                        <NavLink to={item.path}>
+                            {item?.config?.meta?.name}
+                        </NavLink>
                     </li>
                 ))}
             </ul>

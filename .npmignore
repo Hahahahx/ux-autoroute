@@ -8,3 +8,9 @@ tsconfig.json
 .editorconfig
 .yarn-error.log
 webpack.config.js
+parse
+config
+package-lock.json
+yarn.lock
+go.*
+*.go
