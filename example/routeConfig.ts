@@ -6,8 +6,8 @@ import loadable from '@loadable/component';
 const router=[
 	{
 		config: {
-			meta: {
-				name: '根'
+			htmlmeta: {
+				title: '根'
 			},
 			noLazy: true
 		},
@@ -17,8 +17,8 @@ const router=[
 			{
 				config: {
 					default: true,
-					meta: {
-						name: '登录'
+					htmlmeta: {
+						title: '登录'
 					}
 				},
 				component: loadable(function(){return import('./pages/login')}),
@@ -27,8 +27,8 @@ const router=[
 			},
 			{
 				config: {
-					meta: {
-						name: '首页'
+					htmlmeta: {
+						title: '首页'
 					},
 					noLazy: true
 				},
@@ -37,8 +37,8 @@ const router=[
 				child: [
 					{
 						config: {
-							meta: {
-								name: '土豆'
+							htmlmeta: {
+								title: '土豆'
 							}
 						},
 						component: loadable(function(){return import('./pages/main/potato')}),
@@ -47,8 +47,8 @@ const router=[
 					},
 					{
 						config: {
-							meta: {
-								name: '西红柿'
+							htmlmeta: {
+								title: '西红柿'
 							},
 							noLazy: true
 						},

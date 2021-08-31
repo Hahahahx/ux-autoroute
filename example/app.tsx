@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { HashRouter } from "react-router-dom";
-import { Routers } from "../lib";
+import { Routers, useHtmlMeta } from "../src";
 import routeConfig from "./routeConfig";
 
 const App = () => {
@@ -25,7 +25,6 @@ const App = () => {
         }
     };
 
-
     return (
         <>
             <div>您的角色权限：{getAuthName()}</div>
@@ -34,29 +33,31 @@ const App = () => {
                 <button onClick={setUserAuth(1)}>{getAuthName(1)}</button>
                 <button onClick={setUserAuth(0)}>{getAuthName(0)}</button>
             </div>
-            <HashRouter>
-                <Routers
-                    routers={routeConfig}
-                    before={(location) => {
-                        // console.log(location);
-                        const { hash } = window.location;
-                        const result = routeAuth.some((item, index) => {
-                            return item.some((route) => {
-                                if (hash.includes(route)) {
-                                    return Number.isInteger(userAuth)
-                                        ? // @ts-ignore
-                                          userAuth > index
-                                        : true;
-                                }
-                            });
+            <Routers
+                type="hash"
+                listen={(listen) => {
+                    // console.log(l);
+                }}
+                routers={routeConfig}
+                before={(location) => {
+                    // console.log(location);
+                    const { hash } = window.location;
+                    const result = routeAuth.some((item, index) => {
+                        return item.some((route) => {
+                            if (hash.includes(route)) {
+                                return Number.isInteger(userAuth)
+                                    ? // @ts-ignore
+                                      userAuth > index
+                                    : true;
+                            }
                         });
-                        if (result) {
-                            return <>您无权访问</>;
-                        }
-                    }}
-                    noMatch={<>404</>}
-                />
-            </HashRouter>
+                    });
+                    if (result) {
+                        return <>您无权访问</>;
+                    }
+                }}
+                noMatch={<>404</>}
+            />
         </>
     );
 };
