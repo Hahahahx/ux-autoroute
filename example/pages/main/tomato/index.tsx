@@ -1,5 +1,5 @@
 import React from "react";
-import { useRouter } from "../../../../src";
+import { useRouter } from "../../../../lib";
 
 const Tomato = () => {
     const { config } = useRouter();

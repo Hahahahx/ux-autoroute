@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { RouterView, useRouter } from "../../../src";
+import { RouterView, useRouter } from "../../../lib";
 
 const Main = () => {
     const { config, routers } = useRouter();
@@ -9,7 +9,7 @@ const Main = () => {
         <>
             {config?.htmlmeta?.title}
             <ul>
-                {routers.map((item, index) => (
+                {routers.map((item: any, index: any) => (
                     <li key={index}>
                         <NavLink to={item.path}>
                             {item?.config?.htmlmeta?.title}
