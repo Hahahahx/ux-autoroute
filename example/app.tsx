@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { HashRouter } from "react-router-dom";
-import { Routers, useHtmlMeta } from "../src";
+import { Routers, useHtmlMeta } from "../lib";
 import routeConfig from "./routeConfig";
 
 const App = () => {
@@ -35,11 +35,11 @@ const App = () => {
             </div>
             <Routers
                 type="hash"
-                listen={(listen) => {
+                listen={(listen:any) => {
                     // console.log(l);
                 }}
                 routers={routeConfig}
-                before={(location) => {
+                before={(location:any) => {
                     // console.log(location);
                     const { hash } = window.location;
                     const result = routeAuth.some((item, index) => {

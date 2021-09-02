@@ -43,6 +43,11 @@ declare module "ux-autoroute" {
      */
     export function useRouter(): RouterContextParams & { history: any };
 
+    /**
+     * 获取meta信息
+     */
+    export function useHtmlMeta(): HtmlMeta;
+
     export interface RouteParams {
         path: string;
         config?: RouteConfig;
@@ -63,6 +68,8 @@ declare module "ux-autoroute" {
         config?: RouteConfig;
         router?: JSX.Element | React.ReactElement;
     }
+
+    export type HtmlMeta = HtmlMetaContextParams;
 
     export type HtmlMetaContextParams = {
         htmlMeta?: HtmlMetaConfig;

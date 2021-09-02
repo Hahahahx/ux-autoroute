@@ -17,6 +17,10 @@ export default defineConfig({
             filename: "routeConfig.ts",
         }),
     ],
+    build: {
+        outDir: path.join(__dirname, "../example/dist"),
+        emptyOutDir: true,
+    },
     // server:{
     //   proxy:{
     //     '/api':{
