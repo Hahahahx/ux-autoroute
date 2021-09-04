@@ -1,5 +1,7 @@
 /// <reference types="react" />
 
+import { LoadableComponent } from "@loadable/component";
+
 declare module "ux-autoroute" {
     /// <reference types="react" />
 
@@ -50,9 +52,14 @@ declare module "ux-autoroute" {
 
     export interface RouteParams {
         path: string;
-        config?: RouteConfig;
+        config?: RouteConfig | null;
         child: Array<RouteParams> | null;
-        component?: any;
+        component?:
+            | LoadableComponent<any>
+            | JSX.Element
+            | React.ReactElement
+            | React.FC
+            | null;
     }
 
     export interface RouteConfig {
