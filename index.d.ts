@@ -77,9 +77,9 @@ declare module "ux-autoroute" {
     };
 
     export interface HtmlMetaConfig {
-        link: HtmlLinkAttr[];
-        meta: HtmlMetaAttr[];
-        javascript: HtmlJavaScriptAttr[];
+        link?: HtmlLinkAttr[];
+        meta?: HtmlMetaAttr[];
+        javascript?: HtmlJavaScriptAttr[];
         title: string;
         [k: string]: any;
     }
