@@ -53,9 +53,7 @@ declare interface RouteConfig {
     htmlmeta?: HtmlMetaConfig;
 }
 
-declare interface RouterContextParams {
-    routers: Array<RouteParams>;
-    config?: RouteConfig;
+declare interface RouterContextParams extends RouteParams {
     router?: JSX.Element | React.ReactElement;
 }
 
@@ -87,4 +85,8 @@ declare interface HtmlLinkAttr {
 declare interface HtmlJavaScriptAttr {
     src: string;
     [k: string]: any;
+}
+
+declare interface RouterViewProps {
+    mainComponent?: React.ReactNode;
 }

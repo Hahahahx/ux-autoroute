@@ -1,15 +1,21 @@
-import React, { createContext, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import React, { createContext, FC, useContext } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 
 export const RouterContext = createContext<RouterContextParams>({
-    routers: [],
+    path: "",
+    child: [],
 });
 
 /**
  * 对外暴露的子集路由
  */
-export const RouterView = () => {
+export const RouterView: FC<RouterViewProps> = ({ mainComponent }) => {
     const Router = useContext(RouterContext);
+
+    if (mainComponent && window.location.href.includes(Router.path)) {
+        return <>{mainComponent}</>;
+    }
+
     return Router.router ? Router.router : <></>;
 };
 

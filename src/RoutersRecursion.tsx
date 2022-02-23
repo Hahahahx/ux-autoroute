@@ -44,8 +44,7 @@ const Routers: FC<RouterRecursionParams> = ({
                         return (
                             <RouterContext.Provider
                                 value={{
-                                    routers: route.child || [],
-                                    config: route.config,
+                                    ...route,
                                     router:
                                         route.child && route.child.length ? (
                                             <RoutersRecursion
