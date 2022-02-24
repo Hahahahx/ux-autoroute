@@ -11,8 +11,9 @@ export const RouterContext = createContext<RouterContextParams>({
  */
 export const RouterView: FC<RouterViewProps> = ({ mainComponent }) => {
     const Router = useContext(RouterContext);
+    const location = useLocation();
 
-    if (mainComponent && window.location.href.includes(Router.path)) {
+    if (mainComponent && location.pathname === Router.path) {
         return <>{mainComponent}</>;
     }
 
