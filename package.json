@@ -3,7 +3,7 @@
     "auther": {
         "name": "ux"
     },
-    "version": "2.2.4",
+    "version": "2.2.5",
     "description": "自动路由映射表分析组件",
     "repository": "https://github.com/Hahahahx/ux-autoroute.git",
     "main": "lib/index.js",
@@ -58,6 +58,6 @@
         "react-router-dom": "^6.2.2",
         "@types/react-helmet": "^6.1.2",
         "react-helmet": "^6.1.0",
-        "ux-autoroute-plugin": "^2.1.2"
+        "ux-autoroute-plugin": "^2.1.3"
     }
 }

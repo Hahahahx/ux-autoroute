@@ -16,7 +16,7 @@ const router=[
 				config: null,
 				element: PageLogin,
 				path: '/login',
-				index: true,
+				index: false,
 				child: null
 			},
 			{
