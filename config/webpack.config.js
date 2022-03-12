@@ -10,7 +10,8 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
 const uxAutoRoutePlugin = new plugin.AutoRouterWebPackPlugin({
     pagePath: path.join(__dirname, "../example/pages"),
     output: path.join(__dirname, "../example"),
-    filename: "routeConfig.ts",
+    filename: "routeConfig.ts", 
+    // defaultLazyImport: true 
 });
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 

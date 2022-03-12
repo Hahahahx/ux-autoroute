@@ -1,25 +1,24 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { RouterView, useRouter } from "../../../lib";
+import { RouterView, useRouter } from "../../../src";
 
 const Main = () => {
-    const { config, routers } = useRouter();
-    // console.log(config)
+    const { child } = useRouter();
+
+    console.log(child);
+
     return (
         <>
-            {config?.htmlmeta?.title}
             <ul>
-                {routers.map((item: any, index: any) => (
+                <li> main</li>
+                {child.map((item: any, index: any) => (
                     <li key={index}>
-                        <NavLink to={item.path}>
-                            {item?.config?.htmlmeta?.title}
-                        </NavLink>
+                        <NavLink to={item.path}>{item?.path}</NavLink>
                     </li>
                 ))}
             </ul>
-
             <div>
-                <RouterView />
+                <RouterView noMatch={<>sdfad</>}/>
             </div>
         </>
     );

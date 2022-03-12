@@ -1,27 +1,24 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { RouterView, useRouter } from "../../lib";
+import { Navigate, NavLink } from "react-router-dom";
+import { RouterView, useRouter } from "../../src";
 
 const Index = () => {
-    const { config, routers, history } = useRouter();
+    const { child } = useRouter();
 
-    // console.log(routers);
+    console.log("asdfadlkfjalkdj;lj;",child);
 
     return (
         <>
             <ul>
-                <li> {config?.htmlmeta?.title}</li>
-                {routers.map((item:any, index:any) => (
+                <li> index</li>
+                {child.map((item: any, index: any) => (
                     <li key={index}>
-                        <NavLink to={item.path}>
-                            {item?.config?.htmlmeta?.title}
-                        </NavLink>
+                        <NavLink to={item.path}>{item?.path}</NavLink>
                     </li>
                 ))}
             </ul>
             <div>
-                {history.location.pathname != "/main"}
-                <RouterView />
+                <RouterView noMatch={<Navigate to="login" />} />
             </div>
         </>
     );

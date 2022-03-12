@@ -1,41 +1,36 @@
 import React, { createContext, FC, useContext } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { RoutersRecursion } from "./RoutersRecursion";
+import {
+    RouterContextParams,
+    RouterRecursionParams,
+    RouterViewProps,
+} from "./type";
 
 export const RouterContext = createContext<RouterContextParams>({
     path: "",
     child: [],
+    routers: [],
+    unmount: () => {},
+    mount: () => {},
 });
 
 /**
  * 对外暴露的子集路由
  */
-export const RouterView: FC<RouterViewProps> = ({ mainComponent }) => {
+export const RouterView: FC<Partial<RouterRecursionParams>> = ({
+    ...props
+}) => {
     const Router = useContext(RouterContext);
-    const location = useLocation();
 
-    if (mainComponent && location.pathname === Router.path) {
-        return <>{mainComponent}</>;
+    if (Router.routers && Router.routers.length) {
+        return <RoutersRecursion {...{ ...Router, ...props }} />;
     }
 
-    return Router.router ? Router.router : <></>;
+    return <></>;
 };
 
-export const useRouter = (): RouterContextParams & { history: any } => {
-    const history = useHistory();
+export const useRouter = (): RouterContextParams => {
     const router = useContext(RouterContext);
-    return { ...router, history };
-};
-
-export const HtmlMetaContext = createContext<HtmlMetaContextParams>({
-    htmlMeta: {
-        link: new Array<HtmlLinkAttr>(),
-        meta: new Array<HtmlMetaAttr>(),
-        title: "",
-        javascript: new Array<HtmlJavaScriptAttr>(),
-    },
-    setHtmlMeta: () => {},
-});
-
-export const useHtmlMeta = () => {
-    return useContext(HtmlMetaContext);
+    return { ...router };
 };

@@ -1,5 +1,13 @@
 /// <reference types="react" />
 
+import React from "react";
+import {
+    HashRouter,
+    BrowserRouter,
+    useRoutes,
+    RouteObject,
+    NavigateFunction,
+} from "react-router-dom";
 /**
  * routers 路由映射表对象
  * noMatch 404
@@ -7,17 +15,16 @@
  * after 路由组件生成后触发
  */
 declare interface RouterRecursionParams {
+    unmount?: (params: RouteParams & { navigate: NavigateFunction }) => void;
+    mount?: (params: RouteParams & { navigate: NavigateFunction }) => void;
     routers: Array<RouteParams>;
-    noMatch?: React.ReactElement | JSX.Element;
-    before?: (
-        location: any & Location
-    ) => void | JSX.Element | React.ReactElement;
-    after?: (location: any & Location) => void;
+    noMatch?: React.ReactElement | JSX.Element | React.ReactNode;
+    redirect?: React.ReactElement | JSX.Element | React.ReactNode;
+    defaultRoute?: React.ReactElement | JSX.Element | React.ReactNode;
 }
 
 declare type RouterParams = RouterRecursionParams & {
     type: "hash" | "history";
-    listen?: (listener: any) => any;
 };
 
 declare function Routers(params: RouterParams): JSX.Element;
@@ -40,9 +47,8 @@ declare function useRouter(): RouterContextParams & { history: any };
 
 declare interface RouteParams {
     path: string;
-    config?: RouteConfig;
-    child: Array<RouteParams> | null;
-    component?: any;
+    child?: Array<RouteParams> | null;
+    element?: any;
 }
 
 declare interface RouteConfig {
@@ -53,9 +59,7 @@ declare interface RouteConfig {
     htmlmeta?: HtmlMetaConfig;
 }
 
-declare interface RouterContextParams extends RouteParams {
-    router?: JSX.Element | React.ReactElement;
-}
+declare type RouterContextParams = RouteParams & RouterRecursionParams;
 
 declare type HtmlMetaContextParams = {
     htmlMeta?: HtmlMetaConfig;

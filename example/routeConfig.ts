@@ -1,59 +1,42 @@
 import Page from './pages/index';
+import PageLogin from './pages/login/index';
 import PageMain from './pages/main/index';
+import PageMainPotato from './pages/main/potato/index';
 import PageMainTomato from './pages/main/tomato/index';
 import loadable from '@loadable/component';
 
 const router=[
 	{
-		config: {
-			htmlmeta: {
-				title: '根'
-			},
-			noLazy: true
-		},
-		component: Page,
+		config: null,
+		element: Page,
 		path: '',
+		index: false,
 		child: [
 			{
-				config: {
-					default: true,
-					htmlmeta: {
-						title: '登录'
-					}
-				},
-				component: loadable(function(){return import('./pages/login')}),
+				config: null,
+				element: PageLogin,
 				path: '/login',
+				index: true,
 				child: null
 			},
 			{
-				config: {
-					htmlmeta: {
-						title: '首页'
-					},
-					noLazy: true
-				},
-				component: PageMain,
+				config: null,
+				element: PageMain,
 				path: '/main',
+				index: false,
 				child: [
 					{
-						config: {
-							htmlmeta: {
-								title: '土豆'
-							}
-						},
-						component: loadable(function(){return import('./pages/main/potato')}),
+						config: null,
+						element: PageMainPotato,
 						path: '/main/potato',
+						index: false,
 						child: null
 					},
 					{
-						config: {
-							htmlmeta: {
-								title: '西红柿'
-							},
-							noLazy: true
-						},
-						component: PageMainTomato,
+						config: null,
+						element: PageMainTomato,
 						path: '/main/tomato',
+						index: false,
 						child: null
 					}
 				]
@@ -62,4 +45,4 @@ const router=[
 	}
 ]
 
-export default router
+export default router;

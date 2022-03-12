@@ -15,6 +15,7 @@ export default defineConfig({
             pagePath: path.join(__dirname, "../example/pages"),
             output: path.join(__dirname, "../example"),
             filename: "routeConfig.ts",
+            // defaultLazyImport: true
         }),
     ],
     build: {

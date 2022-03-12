@@ -1,9 +1,10 @@
 import React from "react";
-import { useRouter } from "../../../../lib";
+// import { useRouter } from "../../../../src";
 
 const Potato = () => {
-    const { config } = useRouter();
-    return <>{config?.htmlmeta?.title}</>;
+    // const { config } = useRouter();
+    // return <>{config?.htmlmeta?.title}</>
+    return <>{"potatp"}</>;
 };
 
 export default Potato;
