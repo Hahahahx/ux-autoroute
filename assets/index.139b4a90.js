@@ -1,0 +1,1 @@
+import{R as e}from"./vendor.7afd1d34.js";import{u as t}from"./index.3e6f2ae9.js";const n=()=>{var n;const{config:o}=t();return e.createElement(e.Fragment,null,null==(n=null==o?void 0:o.htmlmeta)?void 0:n.title)};export{n as default};
