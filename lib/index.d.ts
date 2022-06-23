@@ -46,7 +46,7 @@ declare module "ux-autoroute" {
      * 获取路由信息
      */
     export function useRouter(): RouterContextParams & { history: any };
-    export function useHelmet(): HelmetHook;
+    export function useHelmet(title?: string): HelmetHook;
 
     export type RouterContextParams = RouteParams & RouterRecursionParams;
 
