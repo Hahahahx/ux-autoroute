@@ -40,7 +40,9 @@ declare module "ux-autoroute" {
     /**
      * 子集路由映射组件
      */
-    export function RouterView(): JSX.Element;
+    export function RouterView(
+        params: Partial<RouterRecursionParams>
+    ): JSX.Element;
     /**
      * useRoute
      * 获取路由信息
