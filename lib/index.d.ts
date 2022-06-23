@@ -13,6 +13,7 @@ declare module "ux-autoroute" {
      * after 路由组件生成后触发
      */
     export interface RouterRecursionParams {
+        mainComponent?: React.ReactNode;
         unmount?: (
             params: RouteParams & { navigate: NavigateFunction }
         ) => void;
@@ -20,7 +21,7 @@ declare module "ux-autoroute" {
         routers: Array<RouteParams>;
         noMatch?: React.ReactElement | JSX.Element | React.ReactNode;
         redirect?: React.ReactElement | JSX.Element | React.ReactNode;
-        defaultRoute?: React.ReactElement | JSX.Element | React.ReactNode;
+        defaultRoute?: string;
     }
 
     export type RouterParams = RouterRecursionParams & {

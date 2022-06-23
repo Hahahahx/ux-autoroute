@@ -15,6 +15,7 @@ import {
  * after 路由组件生成后触发
  */
 declare interface RouterRecursionParams {
+    mainComponent?: React.ReactNode;
     unmount?: (params: RouteParams & { navigate: NavigateFunction }) => void;
     mount?: (params: RouteParams & { navigate: NavigateFunction }) => void;
     routers: Array<RouteParams>;

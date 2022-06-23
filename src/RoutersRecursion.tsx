@@ -44,11 +44,7 @@ const Routers: FC<RouterRecursionParams> = ({
                 const lastPath = route.path.split("/").pop();
                 const hasChild = route.child ? "/*" : "";
                 const path = lastPath + hasChild;
-                console.log(
-                    defaultRoute === route.path,
-                    defaultRoute,
-                    route.path
-                );
+                
                 return (
                     <Route
                         key={index}

@@ -1,10 +1,7 @@
 import React, { createContext, FC, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { RoutersRecursion } from "./RoutersRecursion";
-import {
-    RouterContextParams,
-    RouterRecursionParams, 
-} from "./type";
+import { RouterContextParams, RouterRecursionParams } from "./type";
 
 export const RouterContext = createContext<RouterContextParams>({
     path: "",
@@ -22,7 +19,11 @@ export const RouterView: FC<Partial<RouterRecursionParams>> = ({
 }) => {
     const Router = useContext(RouterContext);
 
-    console.log(props)
+    const location = useLocation();
+
+    if (props.mainComponent && location.pathname === Router.path) {
+        return props.mainComponent as any;
+    }
 
     if (Router.routers && Router.routers.length) {
         return <RoutersRecursion {...{ ...Router, ...props }} />;
