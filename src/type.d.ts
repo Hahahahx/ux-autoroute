@@ -20,7 +20,7 @@ declare interface RouterRecursionParams {
     routers: Array<RouteParams>;
     noMatch?: React.ReactElement | JSX.Element | React.ReactNode;
     redirect?: React.ReactElement | JSX.Element | React.ReactNode;
-    defaultRoute?: React.ReactElement | JSX.Element | React.ReactNode;
+    defaultRoute?: string;
 }
 
 declare type RouterParams = RouterRecursionParams & {
@@ -45,6 +45,8 @@ declare function RouterView(): JSX.Element;
  */
 declare function useRouter(): RouterContextParams & { history: any };
 
+declare function useHelmet(): HelmetHook;
+
 declare interface RouteParams {
     path: string;
     child?: Array<RouteParams> | null;
@@ -61,36 +63,8 @@ declare interface RouteConfig {
 
 declare type RouterContextParams = RouteParams & RouterRecursionParams;
 
-declare type HtmlMetaContextParams = {
-    htmlMeta?: HtmlMetaConfig;
-    setHtmlMeta: (htmlMeta: HtmlMetaConfig | undefined) => void;
-};
-
-declare interface HtmlMetaConfig {
-    link: HtmlLinkAttr[];
-    meta: HtmlMetaAttr[];
-    javascript: HtmlJavaScriptAttr[];
-    title: string;
-    [k: string]: any;
-}
-
-declare interface HtmlMetaAttr {
-    name: string;
-    content: string;
-    [k: string]: any;
-}
-
-declare interface HtmlLinkAttr {
-    rel: string;
-    href: string;
-    [k: string]: any;
-}
-
-declare interface HtmlJavaScriptAttr {
-    src: string;
-    [k: string]: any;
-}
-
-declare interface RouterViewProps {
-    mainComponent?: React.ReactNode;
+declare interface HelmetHook {
+    html: Headers[];
+    setHtml: React.Dispatch<React.SetStateAction<Headers[]>>;
+    setTitle: React.Dispatch<React.SetStateAction<string>>;
 }

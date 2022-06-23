@@ -1,5 +1,12 @@
 import React, { FC, useEffect } from "react";
-import { Route, RouteObject, Routes, useNavigate } from "react-router-dom";
+import {
+    Navigate,
+    Route,
+    RouteObject,
+    Routes,
+    useLocation,
+    useNavigate,
+} from "react-router-dom";
 import { RouterContext } from "./common";
 import { RouteParams, RouterRecursionParams } from "./type";
 
@@ -15,12 +22,33 @@ const Routers: FC<RouterRecursionParams> = ({
     defaultRoute,
     redirect,
 }) => {
+    let location = useLocation();
+
+    // 如果/main 存在子路由 /main/a,/main/b
+    // 那么进入/main时会先过滤前面的 a,b 然后到*
+    // 问题根源在于Route组件的index配置是无效的
+    // 所以我们需要手动的配置默认的路由
+    // 同时我们还可以具备未匹配的路由跳转404
+
+    // 有默认路由则跳到默认路由去，否则跳到404
+    const to =
+        defaultRoute && defaultRoute.includes(location.pathname) ? (
+            <Navigate to={defaultRoute} replace />
+        ) : (
+            noMatch
+        );
+
     return (
         <Routes>
             {routers.map((route: RouteParams, index: number) => {
                 const lastPath = route.path.split("/").pop();
                 const hasChild = route.child ? "/*" : "";
                 const path = lastPath + hasChild;
+                console.log(
+                    defaultRoute === route.path,
+                    defaultRoute,
+                    route.path
+                );
                 return (
                     <Route
                         key={index}
@@ -41,7 +69,7 @@ const Routers: FC<RouterRecursionParams> = ({
                     />
                 );
             })}
-            <Route path="*" element={noMatch} />
+            <Route path="*" element={to} />
         </Routes>
     );
 };
@@ -82,8 +110,6 @@ const Router = ({
         return redirect;
     }
 
-    const Compoennt = router;
-
     return (
         <RouterContext.Provider
             value={{
@@ -97,7 +123,6 @@ const Router = ({
             }}
         >
             {React.createElement(router)}
-            {/* <Compoennt /> */}
         </RouterContext.Provider>
     );
 };

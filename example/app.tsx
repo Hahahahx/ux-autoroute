@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { HashRouter, useNavigate } from "react-router-dom";
 import { Routers } from "../src";
 import Index from "./pages";
+import { createRoot } from "react-dom/client";
 import routeConfig from "./routeConfig";
 const App = () => {
     const [userAuth, setAuth] = useState(false);
@@ -31,4 +32,6 @@ const App = () => {
     );
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const container = document.getElementById("root");
+const root = createRoot(container!); // createRoot(container!) if you use TypeScript
+root.render(<App />);

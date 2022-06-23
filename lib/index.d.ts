@@ -46,6 +46,7 @@ declare module "ux-autoroute" {
      * 获取路由信息
      */
     export function useRouter(): RouterContextParams & { history: any };
+    export function useHelmet(): HelmetHook;
 
     export type RouterContextParams = RouteParams & RouterRecursionParams;
 
@@ -53,5 +54,11 @@ declare module "ux-autoroute" {
         path: string;
         child?: Array<RouteParams> | null;
         element?: any;
+    }
+
+    export interface HelmetHook {
+        html: Headers[];
+        setHtml: React.Dispatch<React.SetStateAction<Headers[]>>;
+        setTitle: React.Dispatch<React.SetStateAction<string>>;
     }
 }

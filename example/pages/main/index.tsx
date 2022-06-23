@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import { RouterView, useRouter } from "../../../src";
 
 const Main = () => {
@@ -11,14 +11,14 @@ const Main = () => {
         <>
             <ul>
                 <li> main</li>
-                {child.map((item: any, index: any) => (
+                {child?.map((item: any, index: any) => (
                     <li key={index}>
                         <NavLink to={item.path}>{item?.path}</NavLink>
                     </li>
                 ))}
             </ul>
             <div>
-                <RouterView noMatch={<>sdfad</>}/>
+                <RouterView defaultRoute={"/main/potato"}/>
             </div>
         </>
     );
