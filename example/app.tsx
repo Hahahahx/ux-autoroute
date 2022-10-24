@@ -5,9 +5,14 @@ import { Routers } from "../src";
 import Index from "./pages";
 import { createRoot } from "react-dom/client";
 import routeConfig from "./routeConfig";
+import { lazy } from "react";
+ 
+
 const App = () => {
     const [userAuth, setAuth] = useState(false);
     const routeAuth = ["/tomato", "/potato", "/main"];
+    
+    
 
     return (
         <>

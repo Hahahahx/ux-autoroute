@@ -49,9 +49,16 @@ declare function useRouter(): RouterContextParams & { history: any };
 declare function useHelmet(): HelmetHook;
 
 declare interface RouteParams {
+    element: any;
+    RelativePath: string;
+    AbsolutePath: string;
     path: string;
-    child?: Array<RouteParams> | null;
-    element?: any;
+    pathName: string;
+    index: boolean;
+    lazy: boolean;
+    param: boolean;
+    recursion: boolean;
+    child: Array<RouteParams> | null;
 }
 
 declare interface RouteConfig {

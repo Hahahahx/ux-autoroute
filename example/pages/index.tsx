@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
+import { lazy } from "react";
 import { Navigate, NavLink } from "react-router-dom";
 import { RouterView, useRouter } from "../../src";
-import { useHelmet } from "../../src/Helmet";
+import Potop from "./main/~potato/index";
+import * as Any from "./main/~potato/index";
 
 const Index = () => {
     const { child } = useRouter();
@@ -24,3 +26,9 @@ const Index = () => {
 };
 
 export default Index;
+
+export const handles = {
+    add: () => {
+        console.log("sad");
+    },
+};

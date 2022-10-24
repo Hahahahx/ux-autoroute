@@ -1,4 +1,7 @@
 import React from "react";
+import { lazy } from "react";
+import { useEffect } from "react";
+import { Suspense } from "react";
 import { Navigate, NavLink } from "react-router-dom";
 import { RouterView, useRouter } from "../../../src";
 
@@ -6,7 +9,7 @@ const Main = () => {
     const { child } = useRouter();
 
     console.log(child);
-
+ 
     return (
         <>
             <ul>
@@ -18,7 +21,9 @@ const Main = () => {
                 ))}
             </ul>
             <div>
-                <RouterView defaultRoute={"/main/potato"}/>
+                {/* <Suspense> */}
+                <RouterView defaultRoute={"/main/potato"} />
+                {/* </Suspense> */}
             </div>
         </>
     );
